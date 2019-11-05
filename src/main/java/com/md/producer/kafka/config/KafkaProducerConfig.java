@@ -1,6 +1,10 @@
 package com.md.producer.kafka.config;
 
+import com.md.producer.User;
 import com.md.producer.entity.Hello;
+import com.md.producer.kafka.avro.AvroSerializer;
+import io.confluent.kafka.serializers.KafkaAvroDeserializer;
+import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -54,4 +58,23 @@ public class KafkaProducerConfig {
     }
     //End of <String, Json> Consumer Config
 
+
+    //<String, Avro> Producer Config
+    @Bean
+    public ProducerFactory<String, User> producerAvroFactory() {
+        Map<String, Object> config = new HashMap<>();
+
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka:9092");
+        config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, AvroSerializer.class);
+
+        return new DefaultKafkaProducerFactory<>(config);
+    }
+
+
+    @Bean
+    public KafkaTemplate<String, User> kafkaAvroTemplate() {
+        return new KafkaTemplate<>(producerAvroFactory());
+    }
+    //End of <String, Avro> Consumer Config
 }

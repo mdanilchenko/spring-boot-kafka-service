@@ -1,12 +1,13 @@
-# Spring Boot - Kafka - Zookeeper
-Draft of the spring boot service with Kafka messaging support
+# Spring Boot - Kafka (JSON & Avro) - Zookeeper
+Draft of the spring boot service with Kafka messaging support. Contains Examples of implementation
+- JSON Serialized messages producer and consumer
+- Avro serialized messages producer and consumer
 
 Includes:
 - Rest API to test Kafka message sending/receiving
 - Swagger UI
 - Log4J
-- Kafka StringSerializer and JsonSerializer configs for Producer and Consumer
-- Mysql With Flyway for migrations
+- Kafka JsonSerializer and Avro configs for Producer and Consumer
 - Actuator and micrometer for Prometheus metrics
 
 ### Requirements
